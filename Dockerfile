@@ -1,11 +1,12 @@
 FROM tomcat:10.1-jdk21-temurin
 
-
-RUN rm -rf /usr/local/tomcat/webapps/ROOT
+RUN rm -rf /usr/local/tomcat/webapps/*
 
 COPY target/Foodie.war /usr/local/tomcat/webapps/ROOT.war
 
+COPY startup.sh /startup.sh
+RUN chmod +x /startup.sh
 
-EXPOSE 8080
+EXPOSE 10000
 
-CMD ["catalina.sh", "run"]
+CMD ["/startup.sh"]
